@@ -1,14 +1,14 @@
 version: "3"
 services:
   react-app:
-    image: shubhangdrolia/chat-application-client:latest
+    image: shubhang123/chat-application-client:latest
     stdin_open: true
     ports:
       - "3000:3000"
     networks:
       - mern-app
   api-server:
-    image: shubhangdrolia/chat-application-server:latest
+    image: shubhang123/chat-application-server:latest
     ports:
       - "7000:7000"
     networks:
