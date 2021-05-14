@@ -2,12 +2,11 @@
 - name: Pull and Run docker image
   hosts: all
   tasks:
-    - name: copy docker compose file from folder to remote host
-      copy:
-        src: ./docker-compose.yml
-        dest: ./
-
-    - name: pull images specified in docker-compose
-      command: docker-compose -f ./docker-compose.yml pull
-    - name: run the pulled docker images in detached mode
-      command: docker-compose -f ./docker-compose.yml up -d
+    - name: Pull shubhang123/chat-application-server
+      docker_image:
+        name: shubhang123/chat-application-server
+        source: pull
+    - name: Pull shubhang123/chat-application-client
+      docker_image:
+        name: shubhang123/chat-application-client
+        source: pull
