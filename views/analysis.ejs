@@ -1,0 +1,87 @@
+
+<%- include("partials/header.ejs") %>
+
+    <!-- <div class="ui main container segment">
+        <div class="ui huge header">
+            <h2>Toxic Text Classification</h2>
+        </div>
+        <hr>
+            <div class="ui three column grid">
+                    <div class="column">
+                        <ul>
+                            <h5>Insult - </h5><li><B><a href="#"><%= ip %></a></B></li>
+                            <h5>Hate - </h5><li><B><a href="#"><%= hp %></a></B></li>
+                            <h5>Threat - </h5><li><B><a href="#"><%= tp %></a></B></li>
+                              <h5>Obscene - </h5><li><B><a href="#"><%= op %></a></B></li>
+                              <h5>Severe Toxic - </h5><li><B><a href="#"><%= sp %></a></B></li>
+                              <h5>Toxic - </h5><li><B><a href="#"><%= top %></a></B></li>
+                        </ul>
+                    </div>
+            </div>
+            <a href="/findmyneed/owner"><button class="positive ui button">GO BACK</button></a>
+    </div> -->
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2", //"light1", "dark1", "dark2"
+	title:{
+		text: "Analysis of the text"
+	},
+	axisY:{
+		interval: 10,
+		suffix: "%"
+	},
+	toolTip:{
+		shared: true
+	},
+	data:[{
+		type: "stackedBar100",
+		toolTipContent: "{label}<br><b>{name}:</b> {y} (#percent%)",
+		showInLegend: true,
+		name: "April",
+		dataPoints: [
+			{ y: <%= hps %>, label: "Hate" },
+			{ y: <%= ips %>, label: "Insult" },
+			{ y: <%= tps %>, label: "Threat" },
+			{ y: <%= ops %>, label: "Obscene" },
+			{ y: <%= sps %>, label: "Severe Toxic" },
+			{ y: <%= tops %>, label: "Toxic" }
+		]
+		}]
+});
+chart.render();
+
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+<div class="ui main container segment">
+    <div class="ui huge header">
+        <h2>Toxic Text Classification</h2>
+    </div>
+    <hr>
+        <div class="ui three column grid">
+                <div class="column">
+                    <ul>
+                        <h5>Insult - </h5><li><B><a href="#"><%= ip %></a></B></li>
+                        <h5>Hate - </h5><li><B><a href="#"><%= hp %></a></B></li>
+                        <h5>Threat - </h5><li><B><a href="#"><%= tp %></a></B></li>
+                          <h5>Obscene - </h5><li><B><a href="#"><%= op %></a></B></li>
+                          <h5>Severe Toxic - </h5><li><B><a href="#"><%= sp %></a></B></li>
+                          <h5>Toxic - </h5><li><B><a href="#"><%= top %></a></B></li>
+                    </ul>
+                </div>
+        </div>
+        <a href="http://localhost:3000/"><button class="positive ui button">GO BACK</button></a>
+</div>
+
+<%- include("partials/footer.ejs") %>

@@ -91,7 +91,7 @@ const Header = () => {
                             horizontal: 'right',
                         }}
                     >
-                        <a href="http://localhost:8000"><MenuItem>Analysis</MenuItem></a>
+                        <a href="http://localhost:7000/api/analysis"><MenuItem>Analysis</MenuItem></a>
                         <MenuItem onClick={handleLogout}>Logout</MenuItem>
                     </Menu>
                 </Toolbar>

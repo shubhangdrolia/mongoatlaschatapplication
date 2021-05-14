@@ -6,8 +6,11 @@ const cors = require("cors");
 
 const users = require("./routes/api/users");
 const messages = require("./routes/api/messages");
+const analysis = require("./routes/api/analysis");
 
 const app = express();
+//Training Dataset - Using Internal Dataset
+app.set("view engine","ejs");
 
 // Port that the webserver listens to
 const port = process.env.PORT || 7000;
@@ -63,5 +66,6 @@ app.use(function (req, res, next) {
 // Routes
 app.use("/api/users", users);
 app.use("/api/messages", messages);
+app.use("/api/analysis",analysis);
 
 module.exports = server;
