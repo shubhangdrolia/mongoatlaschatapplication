@@ -1,0 +1,90 @@
+pipeline {
+
+    environment {
+
+
+        registryCredential = 'shubhang123'
+
+        serverImage = ''
+        clientImage = ''
+
+    }
+  agent any
+
+
+  stages {
+
+    stage('Git clone') {
+      steps {
+       git branch: 'main', url: 'https://github.com/shubhangdrolia/mongoatlaschatapplication'
+      }
+    }
+
+    // stage('Installing Dependencies') {
+    //   steps {
+    //     sh 'npm install'
+    //   }
+    // }
+
+
+    // stage('Test') {
+    //   steps {
+    //     sh 'npm test'
+    //   }
+    // }
+
+           stage('Build Docker Server') {
+            steps {
+                script {
+                    serverImage = docker.build "shubhang123/chat-application-server:latest"
+                }
+            }
+        }
+        stage('Build Docker Client') {
+            steps {
+                dir("client") {
+                    script {
+                       clientImage = docker.build "shubhang123/chat-application-client:latest"
+                    }
+                }
+
+            }
+        }
+        stage('Push Server Docker Image to DockerHub') {
+            steps {
+
+                script {
+
+                    docker.withRegistry('', registryCredential){
+
+                        serverImage.push()
+
+                    }
+
+                }
+
+            }
+        }
+        stage('Push Client Docker Image to DockerHub') {
+            steps {
+              script{
+                docker.withRegistry('', registryCredential){
+                    clientImage.push()
+                }
+
+              }
+            }
+        }
+
+   stage('Ansible Pull and Run Docker Image') {
+            steps {
+                dir("deploy-docker") {
+            ansiblePlaybook becomeUser: null, colorized: true, disableHostKeyChecking: true, installation: 'Ansible', inventory: 'inventory', playbook: 'deploy-app.yml', sudoUser: null, extras: '-v'
+                }
+              }
+        }
+
+
+
+  }
+}
