@@ -1,1 +1,1 @@
-192.168.43.60 ansible_user=sachin 
+localhost ansible_user=sachin 
